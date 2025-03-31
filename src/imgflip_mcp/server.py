@@ -15,7 +15,7 @@ import mcp.types as types
 from mcp.server.models import InitializationOptions
 from mcp.server import NotificationOptions, Server
 
-from src import api
+from . import api
 
 # Initialize the MCP server
 server = Server("imgflip-mcp")
@@ -347,13 +347,8 @@ Respond with ONLY the search terms, separated by commas, no additional text or e
 async def main():
     """Main entry point for the MCP server"""
     # Check for required environment variables
-    username = os.getenv("IMGFLIP_USERNAME")
-    password = os.getenv("IMGFLIP_PASSWORD")
-    
-    if not username or not password:
-        logging.warning("IMGFLIP_USERNAME and IMGFLIP_PASSWORD environment variables are required")
-        logging.warning("Without them, you won't be able to create memes")
-    
+    prepare_startup()
+
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
         await server.run(
             read_stream,
@@ -368,8 +363,7 @@ async def main():
             ),
         )
 
-
-def cli():
+def prepare_startup():
     """CLI entry point for imgflip-mcp"""
     logging.basicConfig(level=logging.INFO)
     # Check for environment variables
@@ -377,14 +371,8 @@ def cli():
     password = os.getenv("IMGFLIP_PASSWORD")
     
     if not username or not password:
-        print(
-            "Warning: IMGFLIP_USERNAME and IMGFLIP_PASSWORD environment variables are required",
-            file=sys.stderr,
-        )
-        print(
-            "Without them, you won't be able to create memes",
-            file=sys.stderr,
-        )
+        logging.warning("Warning: IMGFLIP_USERNAME and IMGFLIP_PASSWORD environment variables are required")
+        logging.warning("Without them, you won't be able to create memes")
     
     # Display welcome message
     logging.info("Starting Imgflip MCP Server")
@@ -399,8 +387,12 @@ def cli():
     logging.info("")
     logging.info("API Requirements:")
     logging.info("Set your IMGFLIP_USERNAME and IMGFLIP_PASSWORD as environment variables")
-    asyncio.run(main())
+
+# def cli():
+#     """CLI entry point for imgflip-mcp"""
+#     prepare_startup()
+#     asyncio.run(main())
 
 
-if __name__ == "__main__":
-    cli()
+# if __name__ == "__main__":
+#     cli()

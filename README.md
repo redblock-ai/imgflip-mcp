@@ -17,58 +17,84 @@ It implements the Model Control Protocol (MCP) to allow seamless integration wit
 - 💡 Generate search terms for meme concepts
 - 🚀 Create memes from concept descriptions
 
-## Setup
 
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/imgflip-mcp.git
-
-# Install dependencies
-pip install -r requirements.txt
+git clone https://github.com/redblock-ai/imgflip-mcp.git
+cd imgflip-mcp
+uv sync --dev --all-extras
+uv run imgflip-mcp # Just to test. NOT needed for the rest of instructions here... it will be set by claude computer.
 ```
 
-### Imgflip API Credentials
+#### Imgflip API Credentials
 
 ```bash
-# Set your Imgflip credentials
-export IMGFLIP_USERNAME="your_username"
-export IMGFLIP_PASSWORD="your_password"
+# Create a `.env` file in the root directory of the project and add your Imgflip API credentials:
+IMGFLIP_USERNAME="YOUR_IMGFLIP_USERNAME"
+IMGFLIP_PASSWORD="YOUR_IMGFLIP_PASSWORD"
 ```
 
-### Running the Server
+#### Integrate with Claude Desktop
 
-```bash
-python -m src.server
-```
+On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
 
-## Configuring Claude Desktop
+On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
-To connect Claude Desktop to your MCP server:
+<details>
+  <summary>Development/Unpublished Servers Configuration</summary>
 
-1. Open Claude Desktop
-2. Click on the settings icon (⚙️) in the top right
-3. Select "Extensions"
-4. Click "Add Extension"
-5. Add the following configuration:
-
-```json
-{
-  "name": "imgflip-mcp",
-  "description": "Meme Creation Platform using Imgflip API",
-  "logo": "https://imgflip.com/favicon.ico",
-  "contactInfo": "your@email.com",
-  "server": {
-    "type": "subprocess",
-    "command": "python",
-    "args": ["-m", "src.server"]
+  ```bash
+  "mcpServers": {
+    "imgflip-mcp": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "<PATH_TO_PROJECT_DIR>",
+        "run",
+        "imgflip-mcp"
+      ]
+    }
   }
-}
-```
+  ```
 
-6. Click "Save"
-7. Restart Claude Desktop
+</details>
+
+<details>
+  <summary>Development/Unpublished Servers Configuration if MCP server is hosted in WSL</summary>
+  
+  ```bash
+  "mcpServers": {
+    "imgflip-mcp": {
+      "command": "wsl.exe",
+        "args": [
+            "bash",
+            "-c",
+            "PATH_TO_UV_BIN --directory <PATH_TO_PROJECT_DIR> run imgflip-mcp"
+        ],
+    }
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>Published Servers Configuration</summary>
+
+  ```bash
+  "mcpServers": {
+    "imgflip-mcp": {
+      "command": "uvx",
+      "args": [
+        "imgflip-mcp"
+      ]
+    }
+  }
+  ```
+
+</details>
+
+
 
 ## Using MCP with Claude
 
@@ -94,6 +120,50 @@ Make a meme about debugging code for hours only to find a simple typo.
 | `imgflip_generate_search_terms` | Generate search terms for concepts |
 | `imgflip_create_from_concept` | Create a meme from a concept |
 
+
+## Development
+
+### Building and Publishing
+
+To prepare the package for distribution:
+
+1. Sync dependencies and update lockfile:
+```bash
+uv sync
+```
+
+2. Build package distributions:
+```bash
+uv build
+```
+
+This will create source and wheel distributions in the `dist/` directory.
+
+3. Publish to PyPI:
+```bash
+uv publish
+```
+
+Note: You'll need to set PyPI credentials via environment variables or command flags:
+- Token: `--token` or `UV_PUBLISH_TOKEN`
+- Or username/password: `--username`/`UV_PUBLISH_USERNAME` and `--password`/`UV_PUBLISH_PASSWORD`
+
+### Debugging
+
+Since MCP servers run over stdio, debugging can be challenging. For the best debugging
+experience, we strongly recommend using the [MCP Inspector](https://github.com/modelcontextprotocol/inspector).
+
+
+You can launch the MCP Inspector via [`npm`](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) with this command:
+
+```bash
+npx @modelcontextprotocol/inspector uv --directory <PATH_TO_PROJECT_DIR> run imgflip-mcp
+```
+
+
+Upon launching, the Inspector will display a URL that you can access in your browser to begin debugging.
+
+
 ## License
 
 MIT License
@@ -102,7 +172,7 @@ MIT License
 
 - All the meme creators who have contributed to internet culture
 - [Imgflip API](https://imgflip.com/api)
-- [Model Control Protocol](https://github.com/anthropics/model-control-protocol)
+- [Model Control Protocol](https://github.com/modelcontextprotocol/python-sdk)
 
 ---
 
