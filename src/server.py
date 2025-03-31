@@ -5,19 +5,17 @@ This server provides tools for creating memes using the Imgflip API
 through the Model Control Protocol (MCP).
 """
 
-import asyncio
-import json
-import sys
-import logging
 import os
-from typing import List, Dict, Any, Optional, Union
-
-from mcp.server.models import InitializationOptions
-import mcp.types as types
-from mcp.server import NotificationOptions, Server
+import sys
+import json
+import asyncio
+import logging
 import mcp.server.stdio
+import mcp.types as types
+from mcp.server.models import InitializationOptions
+from mcp.server import NotificationOptions, Server
 
-from . import api
+from src import api
 
 # Initialize the MCP server
 server = Server("imgflip-mcp")
