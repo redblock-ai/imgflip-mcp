@@ -1,6 +1,6 @@
 # MCP: Meme Creation Platform
 
-![MCP Banner](https://api.imgflip.com/placeholder/400/100)
+![MCP Banner]([https://api.imgflip.com/placeholder/400/100](https://i.imgflip.com/9p7wqm.jpg))
 
 A Meme Creation Protocol server for Claude and other AI assistants. Released on April 1st, 2025 because... memes.
 
