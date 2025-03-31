@@ -100,6 +100,7 @@ MIT License
 
 ## Acknowledgements
 
+- All the meme creators who have contributed to internet culture
 - [Imgflip API](https://imgflip.com/api)
 - [Model Control Protocol](https://github.com/anthropics/model-control-protocol)
 
