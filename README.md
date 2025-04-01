@@ -41,6 +41,23 @@ On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
 On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
 <details>
+<summary>Get environment details to update the `claude_desktop_config` file</summary>
+
+- To retrieve the environment details:
+   1. Run the following command in your terminal:
+      ```bash
+      npx @modelcontextprotocol/inspector uv --directory <PATH_TO_PROJECT_DIR> run imgflip-mcp
+      ```
+   2. Open the MCP Inspector on localhost.
+
+   3. Click on Connect.
+
+   4. Copy the output environment key from the terminal.
+
+You can install and use the MCP Inspector via npm if needed.
+</details> 
+
+<details>
   <summary>Development/Unpublished Servers Configuration</summary>
 
   ```bash
