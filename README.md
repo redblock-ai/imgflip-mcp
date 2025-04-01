@@ -11,9 +11,11 @@ It implements the Model Control Protocol (MCP) to allow seamless integration wit
 
 ## Features
 
-- 🚀 Create memes from description, AI chooses its own meme
-- 🎯 Create meme for a specific template from description
-- 🌟 Create meme from popular memes (works for non-premium API access accounts)
+- 🔍 Search for meme templates using keywords
+- 🧠 Get template information including box count
+- 🎨 Create memes with custom text
+- 💡 Generate search terms for meme concepts
+- 🚀 Create memes from concept descriptions
 
 
 ### Installation
@@ -41,6 +43,24 @@ On MacOS: `~/Library/Application\ Support/Claude/claude_desktop_config.json`
 On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
 
 <details>
+<summary>Get environment details to update the `claude_desktop_config` file</summary>
+
+- To retrieve the environment details:
+   1. Run the following command in your terminal:
+      ```bash
+      npx @modelcontextprotocol/inspector uv --directory <PATH_TO_PROJECT_DIR> run imgflip-mcp
+      ```
+   2. Open the MCP Inspector on localhost.
+   
+   3. Click on Connect.
+   
+   4. Copy the output environment key from the terminal.
+
+You can install and use the MCP Inspector via npm if needed.
+</details> 
+
+
+<details>
   <summary>Development/Unpublished Servers Configuration</summary>
 
   ```bash
@@ -52,12 +72,14 @@ On Windows: `%APPDATA%/Claude/claude_desktop_config.json`
         "<PATH_TO_PROJECT_DIR>",
         "run",
         "imgflip-mcp"
-      ]
+      ],
+      "env": {
+       <content from env key in mcp inspector terminal response>
+      }
     }
   }
-  ```
-
-</details>
+```
+</details> 
 
 <details>
   <summary>Development/Unpublished Servers Configuration if MCP server is hosted in WSL</summary>
