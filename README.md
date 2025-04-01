@@ -21,6 +21,7 @@ It implements the Model Control Protocol (MCP) to allow seamless integration wit
 ### Installation
 
 ```bash
+# Ensure you have uv installed (https://docs.astral.sh/uv/getting-started/installation/)
 git clone https://github.com/redblock-ai/imgflip-mcp.git
 cd imgflip-mcp
 uv sync --dev --all-extras
