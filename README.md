@@ -11,11 +11,10 @@ It implements the Model Control Protocol (MCP) to allow seamless integration wit
 
 ## Features
 
-- 🔍 Search for meme templates using keywords
-- 🧠 Get template information including box count
-- 🎨 Create memes with custom text
-- 💡 Generate search terms for meme concepts
-- 🚀 Create memes from concept descriptions
+- 🚀 Create memes from description, AI chooses its own meme
+- 🎯 Create meme for a specific template from description
+- 🌟 Create meme from popular memes (works for non-premium API access accounts)
+
 
 
 ### Installation
